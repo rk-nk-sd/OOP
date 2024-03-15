@@ -1,0 +1,9 @@
+<archetype>
+  <id>sem2Oop</id>
+  <sources>
+    <source>src/main/java/game/App.java</source>
+  </sources>
+  <testSources>
+    <source>src/test/java/game/AppTest.java</source>
+  </testSources>
+</archetype>
