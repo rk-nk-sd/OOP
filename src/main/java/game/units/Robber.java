@@ -10,16 +10,16 @@ import java.util.stream.Collectors;
  */
 public class Robber extends AbstractElixir {
     private static final String HERO_ROBBER_D = "Hero_Robber #%d";
-    private Robber(String name, int hp, int energy) {
-        super(name, hp, energy);
+    private Robber(String name, int hp, Point point, int energy) {
+        super(name, hp, point, energy);
     }
 
-    public Robber(String name) {
-        this(name, Robber.r.nextInt(100), Robber.r.nextInt(50));
+    public Robber(String name, Point point) {
+        this(name, Robber.r.nextInt(100), point, Robber.r.nextInt(50));
     }
 
     public Robber() {
-        this(String.format(Robber.HERO_ROBBER_D, ++Robber.number));
+        this(String.format(Robber.HERO_ROBBER_D, ++Robber.number), new Point());
     }
 
     @Override

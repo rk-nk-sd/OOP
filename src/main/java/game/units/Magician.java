@@ -11,16 +11,16 @@ import java.util.stream.Collectors;
 public class Magician extends Mana {
     private static final String HERO_MAGICIAN_D = "Hero_Magician #%d";
 
-    private Magician(String name, int hp, int energy) {
-        super(name, hp, energy);
+    private Magician(String name, int hp, Point point, int energy) {
+        super(name, hp, point, energy);
     }
 
-    public Magician(String name) {
-        this(name, Magician.r.nextInt(100), Magician.r.nextInt(50));
+    public Magician(String name, Point point) {
+        this(name, Magician.r.nextInt(100), point, Magician.r.nextInt(50));
     }
 
     public Magician() {
-        this(String.format(Magician.HERO_MAGICIAN_D, ++Magician.number));
+        this(String.format(Magician.HERO_MAGICIAN_D, ++Magician.number), new Point());
     }
 
     /**

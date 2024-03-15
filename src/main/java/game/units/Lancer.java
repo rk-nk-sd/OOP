@@ -10,16 +10,16 @@ import java.util.stream.Collectors;
  */
 public class Lancer extends Mana {
     private static final String HERO_LANCER_D = "Hero_Lancer #%d";
-    private Lancer(String name, int hp, int energy) {
-        super(name, hp, energy);
+    private Lancer(String name, int hp, Point point, int energy) {
+        super(name, hp, point, energy);
     }
 
-    public Lancer(String name) {
-        this(name, Lancer.r.nextInt(100), Lancer.r.nextInt(50));
+    public Lancer(String name, Point point) {
+        this(name, Lancer.r.nextInt(100), point, Lancer.r.nextInt(50));
     }
 
     public Lancer() {
-        this(String.format(Lancer.HERO_LANCER_D, ++Lancer.number));
+        this(String.format(Lancer.HERO_LANCER_D, ++Lancer.number), new Point());
     }
 
     @Override

@@ -10,16 +10,16 @@ import java.util.stream.Collectors;
  */
 public class Monk extends AbstractElixir {
     private static final String HERO_MONK_D = "Hero_Monk #%d";
-    private Monk(String name, int hp, int energy) {
-        super(name, hp, energy);
+    private Monk(String name, int hp, Point point, int energy) {
+        super(name, hp, point, energy);
     }
 
-    public Monk(String name) {
-        this(name, Monk.r.nextInt(100), Monk.r.nextInt(50));
+    public Monk(String name, Point point) {
+        this(name, Monk.r.nextInt(100), point, Monk.r.nextInt(50));
     }
 
     public Monk() {
-        this(String.format(Monk.HERO_MONK_D, ++Monk.number));
+        this(String.format(Monk.HERO_MONK_D, ++Monk.number), new Point());
     }
 
     /**

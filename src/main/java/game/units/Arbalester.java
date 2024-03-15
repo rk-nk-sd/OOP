@@ -13,18 +13,18 @@ public class Arbalester extends Mana implements Arrows {
     private static final String HERO_ARBALESTER_D = "Hero_Arbalester #%d";
     private int arrows;
     private final int maxArrows;
-    private Arbalester(String name, int hp, int energy) {
-        super(name, hp, energy);
+    private Arbalester(String name, int hp, Point point, int energy) {
+        super(name, hp, point, energy);
         this.arrows = 10;
         this.maxArrows = this.arrows;
     }
 
-    public Arbalester(String name) {
-        this(name, Arbalester.r.nextInt(100), Arbalester.r.nextInt(50));
+    public Arbalester(String name, Point point) {
+        this(name, Arbalester.r.nextInt(100), point, Arbalester.r.nextInt(50));
     }
 
     public Arbalester() {
-        this(String.format(Arbalester.HERO_ARBALESTER_D, ++Arbalester.number));
+        this(String.format(Arbalester.HERO_ARBALESTER_D, ++Arbalester.number), new Point());
     }
 
     /**

@@ -12,16 +12,16 @@ import java.util.stream.Collectors;
 public class Priest extends AbstractElixir {
     private static final String HERO_PRIEST_D = "Hero_Priest #%d";
 
-    private Priest(String name, int hp, int elixir) {
-        super(name, hp, elixir);
+    private Priest(String name, int hp, Point point, int elixir) {
+        super(name, hp, point, elixir);
     }
 
-    public Priest(String name) {
-        this(name, Priest.r.nextInt(100),Priest.r.nextInt(50));
+    public Priest(String name, Point point) {
+        this(name, Priest.r.nextInt(100), point, Priest.r.nextInt(50));
     }
 
     public Priest() {
-        this(String.format(Priest.HERO_PRIEST_D, ++Priest.number));
+        this(String.format(Priest.HERO_PRIEST_D, ++Priest.number), new Point());
     }
 
     /**

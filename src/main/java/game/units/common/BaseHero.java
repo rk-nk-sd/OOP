@@ -17,7 +17,7 @@ public abstract class BaseHero implements CommonInterface {
     protected int hp;
     protected int maxHp;
 
-    protected Point point = new Point();
+    protected Point point;
 
     boolean isDie = Boolean.FALSE;
     private String teamName;
@@ -28,18 +28,19 @@ public abstract class BaseHero implements CommonInterface {
         BaseHero.r = new Random();
     }
 
-    protected BaseHero(String name, int hp) {
+    protected BaseHero(String name, int hp, Point point) {
         this.name = name;
         this.hp = hp;
         this.maxHp = hp;
+        this.point = point;
     }
 
-    public BaseHero(String name) {
-        this(name, BaseHero.r.nextInt(100));
+    public BaseHero(String name, Point point) {
+        this(name, BaseHero.r.nextInt(100), point);
     }
 
     public BaseHero() {
-        this(String.format(BaseHero.BASE_HERO_D, ++BaseHero.number));
+        this(String.format(BaseHero.BASE_HERO_D, ++BaseHero.number), new Point());
     }
 
     public void attack(BaseHero target) {
