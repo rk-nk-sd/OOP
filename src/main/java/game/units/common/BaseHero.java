@@ -2,8 +2,7 @@ package game.units.common;
 
 import game.units.Point;
 import game.units.interfaces.CommonInterface;
-
-import java.util.ArrayList;
+import java.util.List;
 import java.util.Random;
 
 /**
@@ -14,13 +13,14 @@ public abstract class BaseHero implements CommonInterface {
     protected static int number;
     protected static Random r;
 
-    private String name;
+    private final String name;
     protected int hp;
     protected int maxHp;
 
     protected Point point = new Point();
 
     boolean isDie = Boolean.FALSE;
+    private String teamName;
 
 
     static {
@@ -48,11 +48,12 @@ public abstract class BaseHero implements CommonInterface {
     }
 
     public String getInfo() {
-        return String.format("Name: %s Hp: %d Type: %s Speed: %s",
+        return String.format("Name: %s Hp: %d Type: %s Speed: %s   Teams: %s",
                 this.name,
                 this.hp,
                 Heroes.valueOf(this.getClass().getSimpleName()).getType(),
-                Heroes.valueOf(this.getClass().getSimpleName()).getSpeed());
+                Heroes.valueOf(this.getClass().getSimpleName()).getSpeed(),
+                this.teamName);
     }
 
     public void healed(int Hp) {
@@ -69,7 +70,7 @@ public abstract class BaseHero implements CommonInterface {
         return isDie;
     }
 
-    public BaseHero findTarget(ArrayList<BaseHero> listHero) {
+    public BaseHero findTarget(List<BaseHero> listHero) {
         double minDist = Double.MAX_VALUE;
         BaseHero tmp = null;
         for (BaseHero hero : listHero) {
@@ -79,5 +80,15 @@ public abstract class BaseHero implements CommonInterface {
             }
         }
         return tmp;
+    }
+
+    @Override
+    public String getTeam() {
+        return this.teamName;
+    }
+
+    @Override
+    public void setTeam(String teamName) {
+        this.teamName = teamName;
     }
 }

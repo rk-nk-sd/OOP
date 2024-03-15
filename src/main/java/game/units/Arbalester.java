@@ -3,8 +3,8 @@ package game.units;
 import game.units.interfaces.Arrows;
 import game.units.common.BaseHero;
 import game.units.common.Mana;
-
-import java.util.ArrayList;
+import java.util.List;
+import java.util.stream.Collectors;
 
 /**
  * Арбалетчик
@@ -12,10 +12,11 @@ import java.util.ArrayList;
 public class Arbalester extends Mana implements Arrows {
     private static final String HERO_ARBALESTER_D = "Hero_Arbalester #%d";
     private int arrows;
-    private int maxArrows;
+    private final int maxArrows;
     private Arbalester(String name, int hp, int energy) {
         super(name, hp, energy);
-        this.maxArrows = this.arrows = 10;
+        this.arrows = 10;
+        this.maxArrows = this.arrows;
     }
 
     public Arbalester(String name) {
@@ -31,8 +32,13 @@ public class Arbalester extends Mana implements Arrows {
      * @param list - Принимает список команды противника
      */
     @Override
-    public void step(ArrayList<BaseHero> list) {
-        BaseHero target = this.findTarget(list);
+    public void step(List<BaseHero> list) {
+        List<BaseHero> heroes;
+        heroes = list.stream()
+                .filter(hero -> hero.getTeam() != null && !hero.getTeam().equals(this.getTeam()))
+                .collect(Collectors.toList());
+
+        BaseHero target = this.findTarget(heroes);
         if (arrows > 0 && target != null && !target.isDie()) {
             this.attack(target);
             this.arrows--;

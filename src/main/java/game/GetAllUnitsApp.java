@@ -19,9 +19,17 @@ public class GetAllUnitsApp {
         listHeroes.add(new Robber());
         listHeroes.add(new Sniper());
 
-        List<String> heroesInfoName = listHeroes.stream().map(hero -> hero.getClass().getSimpleName()).collect(Collectors.toList());
-        List<String> heroesInfo = listHeroes.stream().map(hero -> hero.getInfo()).collect(Collectors.toList());
+        List<String> heroesInfo = listHeroes.stream().map(BaseHero::getInfo).collect(Collectors.toList());
         System.out.println(heroesInfo);
 
+        BaseHero heroFromSparta = new Monk();
+        heroFromSparta.setTeam("Sparta");
+
+        BaseHero heroFromIgo = new Monk();
+        heroFromIgo.setTeam("MongoloTatarskoeIgo");
+        System.out.println(heroFromIgo.getInfo());
+
+        BaseHero hero = new Monk();
+        System.out.println(hero.getTeam() != null);
     }
 }

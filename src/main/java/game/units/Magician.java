@@ -2,8 +2,8 @@ package game.units;
 
 import game.units.common.BaseHero;
 import game.units.common.Mana;
-
-import java.util.ArrayList;
+import java.util.List;
+import java.util.stream.Collectors;
 
 /**
  * Маг
@@ -23,18 +23,18 @@ public class Magician extends Mana {
         this(String.format(Magician.HERO_MAGICIAN_D, ++Magician.number));
     }
 
-
-//    public void healed(int Hp) {
-//        this.hp = Hp + this.hp > this.maxHp ? this.maxHp : this.hp;
-//    }
-
     /**
      * Может оживить
      * @param list - Принимает список своей команды
      */
     @Override
-    public void step(ArrayList<BaseHero> list) {
-        BaseHero target = this.findTarget(list);
+    public void step(List<BaseHero> list) {
+        List<BaseHero> heroes;
+        heroes = list.stream()
+                .filter(hero -> hero.getTeam() != null && hero.getTeam().equals(this.getTeam()))
+                .collect(Collectors.toList());
+
+        BaseHero target = this.findTarget(heroes);
         if (target != null && target.isDie()) {
             target.healed(1);
         }

@@ -2,7 +2,8 @@ package game.units;
 
 import game.units.interfaces.Arrows;
 import game.units.common.BaseHero;
-import java.util.ArrayList;
+import java.util.List;
+import java.util.stream.Collectors;
 
 /**
  * Крестьянин
@@ -29,8 +30,13 @@ public class Farmer extends BaseHero {
      * @param list  - Принимает список своей команды
      */
     @Override
-    public void step(ArrayList<BaseHero> list) {
-        BaseHero target = this.findTarget(list);
+    public void step(List<BaseHero> list) {
+        List<BaseHero> heroes;
+        heroes = list.stream()
+                .filter(hero -> hero.getTeam() != null && hero.getTeam().equals(this.getTeam()))
+                .collect(Collectors.toList());
+
+        BaseHero target = this.findTarget(heroes);
         if (arrows > 0 && target != null && !target.isDie()) {
             if (target instanceof Arrows &&
                     ((Arrows) target).getArrows() < ((Arrows) target).getMaxArrows()) {

@@ -1,9 +1,8 @@
 package game.units.interfaces;
 
 import game.units.common.BaseHero;
+import java.util.List;
 
-import java.util.ArrayList;
-
-public interface CommonInterface {
-    void step(ArrayList<BaseHero> list);
+public interface CommonInterface extends Team {
+    void step(List<BaseHero> list);
 }

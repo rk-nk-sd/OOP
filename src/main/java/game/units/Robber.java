@@ -2,8 +2,8 @@ package game.units;
 
 import game.units.common.BaseHero;
 import game.units.common.AbstractElixir;
-
-import java.util.ArrayList;
+import java.util.List;
+import java.util.stream.Collectors;
 
 /**
  * Разбойник
@@ -23,8 +23,13 @@ public class Robber extends AbstractElixir {
     }
 
     @Override
-    public void step(ArrayList<BaseHero> list) {
-        BaseHero target = this.findTarget(list);
+    public void step(List<BaseHero> list) {
+        List<BaseHero> heroes;
+        heroes = list.stream()
+                .filter(hero -> hero.getTeam() != null && !hero.getTeam().equals(this.getTeam()))
+                .collect(Collectors.toList());
+
+        BaseHero target = this.findTarget(heroes);
         if (target != null && !this.isDie()) {
             this.attack(target);
         }
