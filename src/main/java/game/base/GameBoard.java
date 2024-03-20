@@ -1,6 +1,7 @@
 package game.base;
 
 import game.units.common.BaseHero;
+import game.units.common.Heroes;
 
 import java.util.ArrayList;
 import java.util.LinkedList;
@@ -48,7 +49,7 @@ public class GameBoard {
         }
 
         System.out.println("Проверка установки координат для игроков: ");
-        listHeros.forEach(s -> System.out.println(s.getPoint()));
+        listHeros.forEach(s -> System.out.printf("Команда: %s Тип: %s - %s%s", s.getTeam(), Heroes.valueOf(s.getClass().getSimpleName()).getType(), s.getPoint(), System.lineSeparator()));
 
     }
 
