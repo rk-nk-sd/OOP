@@ -95,7 +95,10 @@ public abstract class BaseHero implements CommonAction {
     public void getDamage(int damage) {
         if (this.hp - damage > 0) {
             this.hp -= damage;
-        } else this.isDie = Boolean.TRUE;
+        } else {
+            this.isDie = Boolean.TRUE;
+            this.hp = 0;
+        }
     }
 
     public boolean isDie() {
@@ -106,7 +109,7 @@ public abstract class BaseHero implements CommonAction {
         double minDist = Double.MAX_VALUE;
         BaseHero tmp = null;
         for (BaseHero hero : listHero) {
-            if (point.getDistancePointToPoint(hero.point) < minDist) {
+            if (this.point.getDistancePointToPoint(hero.point) < minDist) {
                 minDist = point.getDistancePointToPoint(hero.point);
                 tmp = hero;
             }

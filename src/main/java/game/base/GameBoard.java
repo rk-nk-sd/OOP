@@ -12,12 +12,12 @@ public class GameBoard {
     public static final int DEFAULT_BOARD_SIZE = 9;
     private final int row;
     private final int col;
-    private final List<BaseHero> listHeros;
+    private final List<BaseHero> listHeroes;
 
-    public GameBoard(int row, int col, List<BaseHero> listHeros) {
+    public GameBoard(int row, int col, List<BaseHero> listHeroes) {
         this.row = row;
         this.col = col;
-        this.listHeros = listHeros;
+        this.listHeroes = listHeroes;
         defaultShapePosition();
     }
 
@@ -38,18 +38,18 @@ public class GameBoard {
     }
 
     private void defaultShapePosition() {
-        LinkedList<String> linkedList = getListUniqueTeams(listHeros);
+        LinkedList<String> linkedList = getListUniqueTeams(listHeroes);
 
         int count = 0;
         while (!linkedList.isEmpty()) {
-            List<BaseHero> left = listHeros.stream().filter(baseHero -> linkedList.get(0).equals(baseHero.getTeam())).collect(
+            List<BaseHero> left = listHeroes.stream().filter(baseHero -> linkedList.get(0).equals(baseHero.getTeam())).collect(
                     Collectors.toList());
             setHerosTeamPositionOnGameBoardDefault(left, this.row, count == 0 ? count++ : this.col);
             linkedList.pop();
         }
 
         System.out.println("Проверка установки координат для игроков: ");
-        listHeros.forEach(s -> System.out.printf("Команда: %s Тип: %s - %s%s", s.getTeam(), Heroes.valueOf(s.getClass().getSimpleName()).getType(), s.getPoint(), System.lineSeparator()));
+        listHeroes.forEach(s -> System.out.printf("Команда: %s Тип: %s - %s%s", s.getTeam(), Heroes.valueOf(s.getClass().getSimpleName()).getType(), s.getPoint(), System.lineSeparator()));
 
     }
 
@@ -85,5 +85,12 @@ public class GameBoard {
                 "row=" + row +
                 ", col=" + col +
                 '}';
+    }
+
+    public void fire() {
+        List<BaseHero> heroes = new ArrayList<>(listHeroes);
+        heroes.sort((o1, o2) -> Heroes.valueOf(o2.getClass().getSimpleName()).getSpeed()
+                - Heroes.valueOf(o1.getClass().getSimpleName()).getSpeed());
+        heroes.forEach(h -> h.step(heroes));
     }
 }

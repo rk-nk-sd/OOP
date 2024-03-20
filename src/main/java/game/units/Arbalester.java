@@ -33,16 +33,18 @@ public class Arbalester extends ShooterAbstract {
      */
     @Override
     public void step(List<BaseHero> list) {
-        List<BaseHero> heroes;
-        heroes = list.stream()
+        if (this.isDie() || arrows < 1) return;
+        List<BaseHero> heroes = list.stream()
                 .filter(hero -> hero.getTeam() != null && !hero.getTeam().equals(this.getTeam()))
                 .collect(Collectors.toList());
 
         BaseHero target = this.findTarget(heroes);
-        if (arrows > 0 && target != null && !target.isDie()) {
+        System.out.printf("\nИНФО\tЦель до атаки:\n%s %s\n", target.getInfo(), target.getPoint());
+        if (!target.isDie()) {
             this.attack(target);
             this.arrows--;
         }
+        System.out.printf("\nАтакующий:\n%s %s -->\n\tЦель после атаки: %s %s", this.getInfo(), this.getPoint(), target.getInfo(), target.getPoint());
     }
 
     @Override
