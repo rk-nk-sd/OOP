@@ -1,15 +1,15 @@
 package game.units;
 
 import game.units.common.BaseHero;
-import game.units.common.AbstractElixir;
-import game.units.interfaces.Elixir;
+import game.units.common.ElixirAbstract;
+import game.units.interfaces.healer.Elixir;
 import java.util.List;
 import java.util.stream.Collectors;
 
 /**
  * Жрец
  */
-public class Priest extends AbstractElixir {
+public class Priest extends ElixirAbstract {
     private static final String HERO_PRIEST_D = "Hero_Priest #%d";
 
     private Priest(String name, int hp, Point point, int elixir) {

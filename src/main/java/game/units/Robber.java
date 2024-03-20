@@ -1,14 +1,14 @@
 package game.units;
 
 import game.units.common.BaseHero;
-import game.units.common.AbstractElixir;
+import game.units.common.ElixirAbstract;
 import java.util.List;
 import java.util.stream.Collectors;
 
 /**
  * Разбойник
  */
-public class Robber extends AbstractElixir {
+public class Robber extends ElixirAbstract {
     private static final String HERO_ROBBER_D = "Hero_Robber #%d";
     private Robber(String name, int hp, Point point, int energy) {
         super(name, hp, point, energy);

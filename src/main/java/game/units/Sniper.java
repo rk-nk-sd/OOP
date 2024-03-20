@@ -1,14 +1,14 @@
 package game.units;
 
 import game.units.common.BaseHero;
-import game.units.common.Mana;
+import game.units.common.ManaAbstract;
 import java.util.List;
 import java.util.stream.Collectors;
 
 /**
  * Снайпер
  */
-public class Sniper extends Mana {
+public class Sniper extends ManaAbstract {
     private static final String HERO_SNIPER_D = "Hero_Sniper #%d";
     private Sniper(String name, int hp, Point point, int energy) {
         super(name, hp, point, energy);

@@ -27,7 +27,7 @@ public class GameGetAllUnitsApp {
         listHeros1.add(new Arbalester());
 
         listHeros1.get(0).step(listHeroes);
-        System.out.println(((Arbalester)listHeros1.get(0)).getArrows());
+//        System.out.println(((Arbalester)listHeros1.get(0)).getArrows());
 
         listHeroes.sort((o1, o2) -> Heroes.valueOf(o2.getClass().getSimpleName()).getSpeed()
                 - Heroes.valueOf(o1.getClass().getSimpleName()).getSpeed());

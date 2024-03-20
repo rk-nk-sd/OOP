@@ -1,7 +1,7 @@
-package game.units.interfaces;
+package game.units.interfaces.other;
 
 public interface Arrows {
     int getArrows();
     int getMaxArrows();
-    void setArrow(int count);
+    void setArrows(int count);
 }

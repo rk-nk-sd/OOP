@@ -2,11 +2,11 @@ package game.units.common;
 
 import game.units.Point;
 
-public abstract class Mana extends BaseHero {
+public abstract class ManaAbstract extends BaseHero {
     private int mana;
-    private final int maxMana;
+    private int maxMana;
 
-    public Mana(String name, int hp, Point point, int energy) {
+    public ManaAbstract(String name, int hp, Point point, int energy) {
         super(name, hp, point);
         this.mana = energy;
         this.maxMana = energy;

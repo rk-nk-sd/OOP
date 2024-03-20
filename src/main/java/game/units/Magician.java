@@ -1,14 +1,14 @@
 package game.units;
 
 import game.units.common.BaseHero;
-import game.units.common.Mana;
+import game.units.common.ManaAbstract;
 import java.util.List;
 import java.util.stream.Collectors;
 
 /**
  * Маг
  */
-public class Magician extends Mana {
+public class Magician extends ManaAbstract {
     private static final String HERO_MAGICIAN_D = "Hero_Magician #%d";
 
     private Magician(String name, int hp, Point point, int energy) {

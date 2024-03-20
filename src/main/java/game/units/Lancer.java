@@ -1,14 +1,14 @@
 package game.units;
 
 import game.units.common.BaseHero;
-import game.units.common.Mana;
+import game.units.common.ManaAbstract;
 import java.util.List;
 import java.util.stream.Collectors;
 
 /**
  * Копейщик
  */
-public class Lancer extends Mana {
+public class Lancer extends ManaAbstract {
     private static final String HERO_LANCER_D = "Hero_Lancer #%d";
     private Lancer(String name, int hp, Point point, int energy) {
         super(name, hp, point, energy);
@@ -22,6 +22,10 @@ public class Lancer extends Mana {
         this(String.format(Lancer.HERO_LANCER_D, ++Lancer.number), new Point());
     }
 
+    /**
+     * Пехотинец
+     * @param list - Принимает список противников
+     */
     @Override
     public void step(List<BaseHero> list) {
         List<BaseHero> heroes;

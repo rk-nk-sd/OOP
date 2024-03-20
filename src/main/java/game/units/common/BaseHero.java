@@ -1,26 +1,55 @@
 package game.units.common;
 
 import game.units.Point;
-import game.units.interfaces.CommonInterface;
+import game.units.interfaces.CommonAction;
+
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
 
 /**
  * Базовый юнит
  */
-public abstract class BaseHero implements CommonInterface {
+public abstract class BaseHero implements CommonAction {
     private static final String BASE_HERO_D = "Hero_BaseHero #%d";
     protected static int number;
     protected static Random r;
 
+    /**
+     * Имя персонажа
+     */
     private final String name;
+
+    /**
+     * Текущее здоровье персонажа
+     */
     protected int hp;
+
+    /**
+     * Максимальный уровень здоровья персонажа
+     */
     protected int maxHp;
 
+
+    /**
+     * Текущая позиция персонажа на игровом поле
+     */
     protected Point point;
 
+    /**
+     * Флаг проверки персонаж в не игры
+     */
     boolean isDie = Boolean.FALSE;
+
+    /**
+     * Имя команды игрока
+     */
     private String teamName;
+
+    /**
+     * Союзники
+     */
+    private List<String> allias;
 
 
     static {
@@ -33,6 +62,7 @@ public abstract class BaseHero implements CommonInterface {
         this.hp = hp;
         this.maxHp = hp;
         this.point = point;
+        allias = new ArrayList<>();
     }
 
     public BaseHero(String name, Point point) {
@@ -49,12 +79,13 @@ public abstract class BaseHero implements CommonInterface {
     }
 
     public String getInfo() {
-        return String.format("Name: %s Hp: %d Type: %s Speed: %s   Teams: %s",
+        return String.format("Name: %s Hp: %d Type: %s Speed: %s Teams: %s Allias: %s",
                 this.name,
                 this.hp,
                 Heroes.valueOf(this.getClass().getSimpleName()).getType(),
                 Heroes.valueOf(this.getClass().getSimpleName()).getSpeed(),
-                this.teamName);
+                this.teamName,
+                this.allias);
     }
 
     public void healed(int Hp) {
@@ -83,6 +114,15 @@ public abstract class BaseHero implements CommonInterface {
         return tmp;
     }
 
+    public Point getPoint() {
+        return point;
+    }
+
+    public void setPoint(int x, int y) {
+        point.setPointX(x);
+        point.setPointY(y);
+    }
+
     @Override
     public String getTeam() {
         return this.teamName;
@@ -91,5 +131,15 @@ public abstract class BaseHero implements CommonInterface {
     @Override
     public void setTeam(String teamName) {
         this.teamName = teamName;
+    }
+
+    @Override
+    public List<String> getAllias() {
+        return allias;
+    }
+
+    @Override
+    public void setAllias(List<String> allias) {
+        this.allias = allias;
     }
 }

@@ -1,13 +1,13 @@
 package game.units.common;
 
 import game.units.Point;
-import game.units.interfaces.Elixir;
+import game.units.interfaces.healer.Elixir;
 
-public abstract class AbstractElixir extends BaseHero implements Elixir {
+public abstract class ElixirAbstract extends BaseHero implements Elixir {
     private int elixir;
     private final int maxElixir;
 
-    public AbstractElixir(String name, int hp, Point point, int energy) {
+    public ElixirAbstract(String name, int hp, Point point, int energy) {
         super(name, hp, point);
         this.elixir = energy;
         this.maxElixir = energy;

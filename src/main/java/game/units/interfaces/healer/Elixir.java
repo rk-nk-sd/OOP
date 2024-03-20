@@ -1,4 +1,4 @@
-package game.units.interfaces;
+package game.units.interfaces.healer;
 
 public interface Elixir {
     int getElixir();

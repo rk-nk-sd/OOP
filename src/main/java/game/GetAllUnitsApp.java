@@ -4,6 +4,7 @@ import game.units.*;
 import game.units.common.BaseHero;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -27,6 +28,7 @@ public class GetAllUnitsApp {
 
         BaseHero heroFromIgo = new Monk();
         heroFromIgo.setTeam("MongoloTatarskoeIgo");
+        heroFromIgo.setAllias(Arrays.asList("Sparta", "Persy"));
         System.out.println(heroFromIgo.getInfo());
 
         BaseHero hero = new Monk();

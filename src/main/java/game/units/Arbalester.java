@@ -1,15 +1,15 @@
 package game.units;
 
-import game.units.interfaces.Arrows;
 import game.units.common.BaseHero;
-import game.units.common.Mana;
+import game.units.common.ShooterAbstract;
+
 import java.util.List;
 import java.util.stream.Collectors;
 
 /**
  * Арбалетчик
  */
-public class Arbalester extends Mana implements Arrows {
+public class Arbalester extends ShooterAbstract {
     private static final String HERO_ARBALESTER_D = "Hero_Arbalester #%d";
     private int arrows;
     private final int maxArrows;
@@ -56,7 +56,7 @@ public class Arbalester extends Mana implements Arrows {
     }
 
     @Override
-    public void setArrow(int count) {
+    public void setArrows(int count) {
         if (count > 1 && this.arrows < this.maxArrows) this.arrows++;
     }
 }

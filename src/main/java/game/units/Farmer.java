@@ -1,7 +1,8 @@
 package game.units;
 
-import game.units.interfaces.Arrows;
 import game.units.common.BaseHero;
+import game.units.interfaces.other.Arrows;
+
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -40,7 +41,7 @@ public class Farmer extends BaseHero {
         if (arrows > 0 && target != null && !target.isDie()) {
             if (target instanceof Arrows &&
                     ((Arrows) target).getArrows() < ((Arrows) target).getMaxArrows()) {
-                ((Arrows) target).setArrow(this.arrows--);
+                ((Arrows) target).setArrows(this.arrows--);
             }
         }
     }
