@@ -44,7 +44,7 @@ public class Arbalester extends ShooterAbstract {
             this.attack(target);
             this.arrows--;
         }
-        System.out.printf("\nАтакующий:\n%s %s -->\n\tЦель после атаки: %s %s", this.getInfo(), this.getPoint(), target.getInfo(), target.getPoint());
+        System.out.printf("\nАтакующий:\n%s %s -->\n\tЦель после атаки: %s %s\n", this.getInfo(), this.getPoint(), target.getInfo(), target.getPoint());
     }
 
     @Override

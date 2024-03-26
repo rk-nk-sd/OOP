@@ -1,7 +1,7 @@
 package game.units.interfaces.other;
 
-import game.units.Point;
+import game.units.common.BaseHero;
 
 public interface Move {
-    Point move(Point currentPoint);
+    void move(BaseHero target);
 }

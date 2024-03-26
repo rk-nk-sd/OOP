@@ -1,5 +1,7 @@
 package game.units;
 
+import java.util.Objects;
+
 /**
  * Класс описывает положение фигуры на координатной оси двумерного пространства
  * */
@@ -51,6 +53,19 @@ public class Point {
 
     public Double getDistancePointToPoint(Point shape1) {
         return Math.sqrt(Math.pow(this.getPointX() - shape1.getPointX(), 2) + Math.pow(this.getPointY() - shape1.getPointY(), 2));
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Point point = (Point) o;
+        return Objects.equals(pointX, point.pointX) && Objects.equals(pointY, point.pointY);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(pointX, pointY);
     }
 
     @Override

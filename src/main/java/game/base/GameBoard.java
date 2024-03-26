@@ -9,15 +9,14 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 public class GameBoard {
+    private final BaseContext context;
     public static final int DEFAULT_BOARD_SIZE = 9;
-    private final int row;
-    private final int col;
-    private final List<BaseHero> listHeroes;
+
 
     public GameBoard(int row, int col, List<BaseHero> listHeroes) {
-        this.row = row;
-        this.col = col;
-        this.listHeroes = listHeroes;
+        context = BaseContext.getInstance();
+        context.setListHeroes(listHeroes);
+        context.setBoardSize(new BoardSize(col, row));
         defaultShapePosition();
     }
 
@@ -38,18 +37,19 @@ public class GameBoard {
     }
 
     private void defaultShapePosition() {
-        LinkedList<String> linkedList = getListUniqueTeams(listHeroes);
+        LinkedList<String> linkedList = getListUniqueTeams(context.getListHeroes());
 
         int count = 0;
         while (!linkedList.isEmpty()) {
-            List<BaseHero> left = listHeroes.stream().filter(baseHero -> linkedList.get(0).equals(baseHero.getTeam())).collect(
+            List<BaseHero> left = context.getListHeroes().stream().filter(baseHero -> linkedList.get(0).equals(baseHero.getTeam())).collect(
                     Collectors.toList());
-            setHerosTeamPositionOnGameBoardDefault(left, this.row, count == 0 ? count++ : this.col);
+            setHerosTeamPositionOnGameBoardDefault(left, context.getBoardSize().getY(), count == 0 ? count++ : context.getBoardSize().getX());
             linkedList.pop();
         }
 
         System.out.println("Проверка установки координат для игроков: ");
-        listHeroes.forEach(s -> System.out.printf("Команда: %s Тип: %s - %s%s", s.getTeam(), Heroes.valueOf(s.getClass().getSimpleName()).getType(), s.getPoint(), System.lineSeparator()));
+        context.getListHeroes().forEach(s -> System.out.printf("Команда: %s Тип: %s - %s%s", s.getTeam(),
+                Heroes.valueOf(s.getClass().getSimpleName()).getType(), s.getPoint(), System.lineSeparator()));
 
     }
 
@@ -62,7 +62,6 @@ public class GameBoard {
             } else {
                 tmpRow += row;
                 heroes.get(i).setPoint(i, defaultCommandPosition + direction);
-
             }
         }
     }
@@ -71,24 +70,20 @@ public class GameBoard {
         return listHeros.stream().map(BaseHero::getTeam).distinct().collect(Collectors.toCollection(LinkedList::new));
     }
 
-    public int getRow() {
-        return row;
-    }
-
-    public int getCol() {
-        return col;
+    public List<BaseHero> getListHeroes() {
+        return context.getListHeroes();
     }
 
     @Override
     public String toString() {
         return "GameBoard{" +
-                "row=" + row +
-                ", col=" + col +
+                "row=" + context.getBoardSize().getY() +
+                ", col=" + context.getBoardSize().getX() +
                 '}';
     }
 
     public void fire() {
-        List<BaseHero> heroes = new ArrayList<>(listHeroes);
+        List<BaseHero> heroes = new ArrayList<>(context.getListHeroes());
         heroes.sort((o1, o2) -> Heroes.valueOf(o2.getClass().getSimpleName()).getSpeed()
                 - Heroes.valueOf(o1.getClass().getSimpleName()).getSpeed());
         heroes.forEach(h -> h.step(heroes));

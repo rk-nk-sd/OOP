@@ -1,5 +1,6 @@
 package game.units.common;
 
+import game.base.BaseContext;
 import game.units.Point;
 import game.units.interfaces.CommonAction;
 
@@ -11,6 +12,7 @@ import java.util.Random;
  * Базовый юнит
  */
 public abstract class BaseHero implements CommonAction {
+    BaseContext context;
     private static final String BASE_HERO_D = "Hero_BaseHero #%d";
     protected static int number;
     protected static Random r;
@@ -63,6 +65,7 @@ public abstract class BaseHero implements CommonAction {
         this.maxHp = hp;
         this.point = point;
         allias = new ArrayList<>();
+        context = BaseContext.getInstance();
     }
 
     public BaseHero(String name, Point point) {
@@ -115,6 +118,14 @@ public abstract class BaseHero implements CommonAction {
             }
         }
         return tmp;
+    }
+
+    public long checkDistance(BaseHero target) {
+        double minDist = Double.MAX_VALUE;
+        if (this.point.getDistancePointToPoint(target.point) < minDist) {
+            minDist = point.getDistancePointToPoint(target.point);
+        }
+        return Math.round(minDist);
     }
 
     public Point getPoint() {
