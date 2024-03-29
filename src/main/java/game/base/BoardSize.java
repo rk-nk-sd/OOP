@@ -16,4 +16,12 @@ public class BoardSize {
     public int getY() {
         return y;
     }
+
+    @Override
+    public String toString() {
+        return "BoardSize{" +
+                "x=" + x +
+                ", y=" + y +
+                '}';
+    }
 }

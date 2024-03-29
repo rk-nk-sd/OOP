@@ -25,7 +25,7 @@ public abstract class BaseHero implements CommonAction {
     /**
      * Текущее здоровье персонажа
      */
-    protected int hp;
+    private int hp;
 
     /**
      * Максимальный уровень здоровья персонажа
@@ -135,6 +135,10 @@ public abstract class BaseHero implements CommonAction {
     public void setPoint(int x, int y) {
         point.setPointX(x);
         point.setPointY(y);
+    }
+
+    public int getHp() {
+        return hp;
     }
 
     @Override

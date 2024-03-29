@@ -1,5 +1,6 @@
 package game.base;
 
+import game.cli.TestView;
 import game.units.common.BaseHero;
 import game.units.common.Heroes;
 
@@ -87,5 +88,10 @@ public class GameBoard {
         heroes.sort((o1, o2) -> Heroes.valueOf(o2.getClass().getSimpleName()).getSpeed()
                 - Heroes.valueOf(o1.getClass().getSimpleName()).getSpeed());
         heroes.forEach(h -> h.step(heroes));
+    }
+
+    public void view() {
+        TestView example = new TestView(this.context);
+        example.view();
     }
 }

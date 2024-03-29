@@ -57,13 +57,33 @@ public class GameBoardTest {
         aliaceLancer.getPoint().setPointY(7);
 
         lancer.step(worldWar.getListHeroes());
+        worldWar.view();
+
         lancer.step(worldWar.getListHeroes());
+        worldWar.view();
+
         lancer.step(worldWar.getListHeroes());
+        worldWar.view();
+
         lancer.step(worldWar.getListHeroes());
+        worldWar.view();
+
         lancer.step(worldWar.getListHeroes());
+        worldWar.view();
+
         lancer.step(worldWar.getListHeroes());
+        worldWar.view();
+
         lancer.step(worldWar.getListHeroes());
+        worldWar.view();
+
         lancer.step(worldWar.getListHeroes());
+        worldWar.view();
+
         lancer.step(worldWar.getListHeroes());
+        worldWar.view();
+
+
+
     }
 }
