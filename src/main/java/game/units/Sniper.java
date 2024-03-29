@@ -24,9 +24,10 @@ public class Sniper extends ManaAbstract {
 
     @Override
     public void step(List<BaseHero> list) {
-        if (this.isDie()) return;
         List<BaseHero> heroes = list.stream()
-                .filter(hero -> hero.getTeam() != null && !hero.getTeam().equals(this.getTeam()))
+                .filter(hero -> hero.getTeam() != null
+                        && (!hero.getTeam().equals(this.getTeam()) && !hero.getAllias().contains(this.getTeam())
+                        && !hero.isDie()))
                 .collect(Collectors.toList());
 
         BaseHero target = this.findTarget(heroes);

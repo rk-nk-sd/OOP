@@ -88,6 +88,7 @@ public class GameBoard {
         heroes.sort((o1, o2) -> Heroes.valueOf(o2.getClass().getSimpleName()).getSpeed()
                 - Heroes.valueOf(o1.getClass().getSimpleName()).getSpeed());
         heroes.forEach(h -> h.step(heroes));
+        view();
     }
 
     public void view() {

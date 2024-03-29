@@ -33,18 +33,24 @@ public class Arbalester extends ShooterAbstract {
      */
     @Override
     public void step(List<BaseHero> list) {
-        if (this.isDie() || arrows < 1) return;
         List<BaseHero> heroes = list.stream()
-                .filter(hero -> hero.getTeam() != null && !hero.getTeam().equals(this.getTeam()))
+                .filter(hero -> hero.getTeam() != null
+                        && (!hero.getTeam().equals(this.getTeam()) && !hero.getAllias().contains(this.getTeam()))
+                        && !hero.isDie()
+                        && !this.equals(hero))
                 .collect(Collectors.toList());
 
+        if (heroes.isEmpty()) {
+            throw new RuntimeException("GameOver!");
+        }
+
         BaseHero target = this.findTarget(heroes);
-        System.out.printf("\nИНФО\tЦель до атаки:\n%s %s\n", target.getInfo(), target.getPoint());
-        if (!target.isDie()) {
+//        System.out.printf("\nИНФО\tЦель до атаки:\n%s %s\n", target.getInfo(), target.getPoint());
+        if (!this.isDie() && arrows > 0 && target != null) {
             this.attack(target);
             this.arrows--;
         }
-        System.out.printf("\nАтакующий:\n%s %s -->\n\tЦель после атаки: %s %s\n", this.getInfo(), this.getPoint(), target.getInfo(), target.getPoint());
+//        System.out.printf("\nАтакующий:\n%s %s -->\n\tЦель после атаки: %s %s\n", this.getInfo(), this.getPoint(), target.getInfo(), target.getPoint());
     }
 
     @Override

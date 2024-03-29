@@ -113,7 +113,7 @@ public abstract class BaseHero implements CommonAction {
         BaseHero tmp = null;
         for (BaseHero hero : listHero) {
             if (this.point.getDistancePointToPoint(hero.point) < minDist) {
-                minDist = point.getDistancePointToPoint(hero.point);
+                minDist = this.point.getDistancePointToPoint(hero.point);
                 tmp = hero;
             }
         }

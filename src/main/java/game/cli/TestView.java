@@ -44,23 +44,24 @@ public class TestView {
         }
         System.out.println();
         for (int i = 0; i < context.getBoardSize().getY() + 1; i++) {
+            StringBuilder sb = new StringBuilder();
             for (int j = 0; j < context.getBoardSize().getX() + 1; j++) {
-                System.out.print("|");
+                sb.append("| ");
                 for (BaseHero hero : context.getListHeroes()) {
                     if (hero.getPoint().equals(new Point(j,i))) {
                         if (group1.contains(hero) && !hero.isDie()) {
-                            System.out.print(AnsiColors.ANSI_GREEN + hero.getClass().getSimpleName().charAt(0) + AnsiColors.ANSI_RESET);
+                            sb.append(AnsiColors.ANSI_GREEN + hero.getClass().getSimpleName().charAt(0) + AnsiColors.ANSI_RESET);
                         } else if (!hero.isDie()){
-                            System.out.print(AnsiColors.ANSI_BLUE + hero.getClass().getSimpleName().charAt(0) + AnsiColors.ANSI_RESET);
+                            sb.append(AnsiColors.ANSI_BLUE + hero.getClass().getSimpleName().charAt(0) + AnsiColors.ANSI_RESET);
                         } else {
-                            System.out.print(AnsiColors.ANSI_RED + hero.getClass().getSimpleName().charAt(0) + AnsiColors.ANSI_RESET);
+                            sb.append(AnsiColors.ANSI_RED + hero.getClass().getSimpleName().charAt(0) + AnsiColors.ANSI_RESET);
                         }
-                    } else {
-                        System.out.print(" ");
                     }
                 }
+                sb.append(" ");
             }
-            System.out.print("|" + System.lineSeparator());
+            sb.append("|");
+            System.out.println(sb.toString().replace("  ", "   "));
         }
     }
 }

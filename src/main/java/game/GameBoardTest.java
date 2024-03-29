@@ -3,6 +3,7 @@ package game;
 import game.units.*;
 import game.units.common.BaseHero;
 import game.base.GameBoard;
+import game.units.common.Heroes;
 
 import java.util.*;
 
@@ -30,12 +31,14 @@ public class GameBoardTest {
 
         List<BaseHero> listHeroes = List.of(heroFromIgo, heroFromSparta, heroFromIgo1, heroFromIgo2, heroFromSparta1);
         GameBoard worldWar = new GameBoard(listHeroes);
-        worldWar.fire();
+//        worldWar.fire();
 
         System.out.println("----------------------");
         BaseHero lancer = new Lancer("Копейщик", new Point(0));
         BaseHero robber = new Robber("Разбойник", new Point(0,9));
         BaseHero aliaceLancer = new Monk("Медик",new Point());
+        BaseHero arbalester = new Arbalester("Стрелок", new Point());
+        BaseHero farmer = new Farmer("Фермер", new Point());
 
         System.out.printf("%s %s%s", lancer.getInfo(), lancer.getPoint(), System.lineSeparator());
         System.out.printf("%s %s%s", robber.getInfo(), robber.getPoint(), System.lineSeparator());
@@ -46,42 +49,52 @@ public class GameBoardTest {
         aliaceLancer.setTeam("Tora");
         aliaceLancer.setAllias(List.of("Troya"));
 
+        farmer.setTeam("Troya");
+        farmer.setAllias(List.of("Tora"));
+
+        arbalester.setTeam("Troya");
+        arbalester.setAllias(List.of("Tora"));
+
         robber.setTeam("MongoloTatarskoeIgo");
         robber.setAllias(List.of("Sparta"));
 
         System.out.println(lancer.checkDistance(robber));
 
-        worldWar = new GameBoard(List.of(lancer, robber, aliaceLancer));
+        worldWar = new GameBoard(List.of(lancer, robber, aliaceLancer,farmer,arbalester));
 
-        aliaceLancer.getPoint().setPointX(0);
-        aliaceLancer.getPoint().setPointY(7);
+        aliaceLancer.setPoint(0,7);
 
-        lancer.step(worldWar.getListHeroes());
+        arbalester.setPoint(9,0);
+        farmer.setPoint(5,5);
         worldWar.view();
 
-        lancer.step(worldWar.getListHeroes());
-        worldWar.view();
 
-        lancer.step(worldWar.getListHeroes());
-        worldWar.view();
+        while (true){
+            try {
+                List<BaseHero> heroes = new ArrayList<>(worldWar.getListHeroes());
+                heroes.sort((o1, o2) -> Heroes.valueOf(o2.getClass().getSimpleName()).getSpeed()
+                        - Heroes.valueOf(o1.getClass().getSimpleName()).getSpeed());
+                for (BaseHero hero : heroes) {
+                    hero.step(worldWar.getListHeroes());
+                }
+                worldWar.view();
+            } catch (RuntimeException e) {
+                worldWar.view();
+                System.out.println(e.getMessage());
+                return;
+            }
+        }
 
-        lancer.step(worldWar.getListHeroes());
-        worldWar.view();
-
-        lancer.step(worldWar.getListHeroes());
-        worldWar.view();
-
-        lancer.step(worldWar.getListHeroes());
-        worldWar.view();
-
-        lancer.step(worldWar.getListHeroes());
-        worldWar.view();
-
-        lancer.step(worldWar.getListHeroes());
-        worldWar.view();
-
-        lancer.step(worldWar.getListHeroes());
-        worldWar.view();
+//        for (BaseHero hero : worldWar.getListHeroes()) {
+//
+//
+//            view();
+//
+////            hero.step(worldWar.getListHeroes());
+//            worldWar.fire();
+////            worldWar.view();
+//            System.out.println("Ход: " + hero.getClass().getSimpleName());
+//        }
 
 
 
