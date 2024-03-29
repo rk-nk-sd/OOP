@@ -4,8 +4,6 @@ import game.base.BaseContext;
 import game.units.Point;
 import game.units.common.BaseHero;
 
-import java.util.ArrayList;
-import java.util.Collections;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -28,10 +26,16 @@ public class TestView {
             return stringBuilder;
         }).collect(Collectors.toList()) + "\n");
         BaseHero baseHero = context.getListHeroes().stream().findFirst().orElse(null);
-        List<BaseHero> group1 = new ArrayList<>();
-        group1 = context.getListHeroes().stream().filter(h -> h.getTeam().equals(baseHero.getTeam()) || baseHero.getAllias().contains(h.getTeam())).collect(
+        List<BaseHero> group1 = context.getListHeroes().stream().filter(h -> h.getTeam().equals(baseHero.getTeam()) || baseHero.getAllias().contains(h.getTeam())).collect(
                 Collectors.toList());
-        System.out.println("Группа союзников: " + baseHero.getTeam());
+
+        System.out.println("Группа союзников: " + AnsiColors.ANSI_GREEN + group1.stream().map(BaseHero::getTeam).distinct().collect(
+                Collectors.toList()) + AnsiColors.ANSI_RESET);
+
+        System.out.println("Группа противников: " + AnsiColors.ANSI_BLUE + context.getListHeroes().stream().filter(h -> !group1.stream().map(BaseHero::getTeam).collect(
+                Collectors.toList()).contains(h.getTeam())).map(BaseHero::getTeam).distinct().collect(Collectors.toList()) + AnsiColors.ANSI_RESET);
+
+        System.out.println();
 
         System.out.println("Step_" + step++ + "\n");
         System.out.print("|");
