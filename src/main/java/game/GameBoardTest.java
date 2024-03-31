@@ -84,19 +84,5 @@ public class GameBoardTest {
                 return;
             }
         }
-
-//        for (BaseHero hero : worldWar.getListHeroes()) {
-//
-//
-//            view();
-//
-////            hero.step(worldWar.getListHeroes());
-//            worldWar.fire();
-////            worldWar.view();
-//            System.out.println("Ход: " + hero.getClass().getSimpleName());
-//        }
-
-
-
     }
 }
