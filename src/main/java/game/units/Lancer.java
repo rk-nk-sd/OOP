@@ -40,15 +40,14 @@ public class Lancer extends InfantryAbstract {
             throw new RuntimeException("GameOver!");
         }
 
-        System.out.println(heroes);
-
         BaseHero target = this.findTarget(heroes);
-        if (!this.isDie() && target != null &&!target.isDie()) {
+        if (!this.isDie() && target != null && !target.isDie()) {
             if (this.checkDistance(target) < 2) {
                 this.attack(target);
             } else {
-                this.move(target);
+                this.move(target); //позиция 9:9 не ходит
             }
+            System.out.printf("%s %s -> %s %s hp:%s\n", this.getName(), this.getPoint(), target.getName(), target.getPoint(), target.getHp());
         }
     }
 }

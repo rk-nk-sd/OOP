@@ -95,4 +95,8 @@ public class GameBoard {
         TestView example = new TestView(this.context);
         example.view();
     }
+
+    public BoardSize getBoardSize() {
+        return this.context.getBoardSize();
+    }
 }

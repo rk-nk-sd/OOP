@@ -18,7 +18,7 @@ public class Farmer extends InfantryAbstract {
      * Стрелы не заканчиваются, но target-у можно отдать только 1 стрелу за 1 подход,
      * дальше идти к другому target-у, затем можно вернуться к первому.
      */
-    private int arrows;
+    private final int arrows;
 
     private BaseHero lastTarget;
 
@@ -52,20 +52,18 @@ public class Farmer extends InfantryAbstract {
                 .collect(Collectors.toList());
 
         if (!heroes.isEmpty() && heroes.size() > 1) {
-            for (BaseHero hero : heroes) {
-                 if (hero.equals(lastTarget)) {
-                     heroes.remove(hero);
-                 }
-            }
+            heroes = heroes.stream().filter(baseHero -> !baseHero.equals(lastTarget)).collect(
+                    Collectors.toList());
         } else {
             lastTarget = null;
         }
 
         BaseHero target = this.findTarget(heroes);
-        if (target != null && !this.isDie()) {
+        if (target != null && !target.isDie() && !this.isDie()) {
             if (this.checkDistance(target) < 2) {
                 ((Arrows) target).setArrows(this.arrows);
                 lastTarget = target;
+                System.out.printf("Игрок %s вручил стрелу игроку %s кол-во стрел у игрока %s: %d\n", this.getName(), target.getName(), target.getName(), ((Arrows) target).getArrows());
             } else {
                 this.move(target);
             }

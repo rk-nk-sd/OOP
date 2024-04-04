@@ -145,6 +145,10 @@ public abstract class BaseHero implements CommonAction {
         return maxHp;
     }
 
+    public String getName() {
+        return name;
+    }
+
     @Override
     public String getTeam() {
         return this.teamName;

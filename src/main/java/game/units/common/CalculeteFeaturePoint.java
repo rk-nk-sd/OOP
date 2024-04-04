@@ -74,16 +74,16 @@ public class CalculeteFeaturePoint{
 
     private List<String> getFreeDirectons() {
         List<String> list = new ArrayList<>();
-        if (context.getListHeroes().stream().noneMatch(p->p.getPoint().equals(this.downStep()))) {
+        if (context.getListHeroes().stream().filter(target -> !target.isDie).noneMatch(p->p.getPoint().equals(this.downStep()))) {
             list.add("down");
         }
-        if (context.getListHeroes().stream().noneMatch(p->p.getPoint().equals(this.upStep()))) {
+        if (context.getListHeroes().stream().filter(target -> !target.isDie).noneMatch(p->p.getPoint().equals(this.upStep()))) {
             list.add("up");
         }
-        if (context.getListHeroes().stream().noneMatch(p->p.getPoint().equals(this.leftStep()))) {
+        if (context.getListHeroes().stream().filter(target -> !target.isDie).noneMatch(p->p.getPoint().equals(this.leftStep()))) {
             list.add("left");
         }
-        if (context.getListHeroes().stream().noneMatch(p->p.getPoint().equals(this.rightStep()))) {
+        if (context.getListHeroes().stream().filter(target -> !target.isDie).noneMatch(p->p.getPoint().equals(this.rightStep()))) {
             list.add("right");
         }
         return list;

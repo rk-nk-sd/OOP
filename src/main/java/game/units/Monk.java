@@ -46,7 +46,7 @@ public class Monk extends HealersMoveImpl {
         }
 
         BaseHero target = this.findTarget(heroes);
-        if (target != null && !target.isDie()) {
+        if (target != null && !target.isDie() && !this.isDie()) {
             if (this.checkDistance(target) < 2) {
                 target.healed(2);
                 lastTarget = target;

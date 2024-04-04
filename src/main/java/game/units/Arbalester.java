@@ -45,12 +45,14 @@ public class Arbalester extends ShooterAbstract {
         }
 
         BaseHero target = this.findTarget(heroes);
-//        System.out.printf("\nИНФО\tЦель до атаки:\n%s %s\n", target.getInfo(), target.getPoint());
-        if (!this.isDie() && arrows > 0 && target != null) {
+        if (!this.isDie() && this.arrows > 0 && target != null && !target.isDie()) {
             this.attack(target);
             this.arrows--;
+            System.out.printf("%s %s -> %s %s hp:%s\n", this.getName(), this.getPoint(), target.getName(), target.getPoint(), target.getHp());
+        } else if(!this.isDie()){
+            System.out.printf("У арбалестера %s закончились стрелы, кол-во стрел: %d позиция: %s\n", this.getName(), this.getArrows(), this.getPoint());
         }
-//        System.out.printf("\nАтакующий:\n%s %s -->\n\tЦель после атаки: %s %s\n", this.getInfo(), this.getPoint(), target.getInfo(), target.getPoint());
+
     }
 
     @Override
@@ -65,6 +67,6 @@ public class Arbalester extends ShooterAbstract {
 
     @Override
     public void setArrows(int count) {
-        if (count > 1 && this.arrows < this.maxArrows) this.arrows++;
+        if (this.arrows < this.maxArrows) this.arrows++;
     }
 }
